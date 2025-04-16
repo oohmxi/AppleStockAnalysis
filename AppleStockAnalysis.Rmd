@@ -1,0 +1,21 @@
+---
+title: "Apple Stock Time Series Forecasting"
+author: "Mr. O"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+library(tidyverse)
+library(forecast)
+library(lubridate)
+```
+
+## Introduction
+
+This report explores the time series analysis and forecasting of Apple stock closing prices using ARIMA models and visual trend analysis.
+
+## Goals
+- Import and clean Apple stock data
+- Visualize long-term and short-term trends
+- Apply ARIMA and moving average models
+- Evaluate forecast accuracy

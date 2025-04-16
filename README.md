@@ -1,0 +1,116 @@
+<p align="center">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg" alt="Apple Logo" width="100"/>
+</p>
+
+# AppleStockAnalysis
+
+### Time Series Forecasting in R
+
+## Project Overview
+
+This project analyzes and forecasts trends in Apple's historical stock price data using R. It applies ARIMA models, seasonal decomposition, and time series visualizations to uncover market patterns and project future performance.
+
+## Technologies Used
+
+- R / RMarkdown
+- tidyverse
+- forecast
+- lubridate
+- ggplot2
+- readr
+
+## Project Goal
+
+To develop a time series forecasting solution using Apple stock price data with a focus on clear visualizations, reproducible modeling, and business-applicable insights.
+
+## Features
+
+- Time series decomposition and exploratory data analysis
+- ARIMA modeling for short-term price forecasting
+- Visualizations of trends, seasonality, and predictions
+- Parameter tuning and accuracy evaluation
+- Renderable RMarkdown report in HTML/PDF
+
+## About ARIMA Forecasting
+
+ARIMA (AutoRegressive Integrated Moving Average) is a powerful statistical model used for time series forecasting. It predicts future values based on past observations, trends, and error patterns. This project uses ARIMA to forecast Apple’s future stock price by analyzing historical performance patterns.
+
+## Project Structure
+
+```
+AppleStockAnalysis/
+├── README.md
+├── AppleStockAnalysis.Rmd
+├── kaizen.md
+├── .gitignore
+├── setup_r_kaizen.py
+├── data/
+│   └── AAPL.csv
+├── docs/
+│   └── AppleStockAnalysis.html
+├── plots/
+│   └── forecast_plot.png
+├── R/
+│   ├── forecasting_utils.R
+│   └── plotting_utils.R
+└── .vscode/
+    ├── settings.json
+    └── launch.json
+```
+
+## How to Run
+
+1. Open `AppleStockAnalysis.Rmd` in RStudio
+2. Knit to HTML or run manually:
+
+```r
+rmarkdown::render("AppleStockAnalysis.Rmd")
+```
+
+3. Output will be saved in `/docs`
+
+## How This Would Scale
+
+- Modularize time series functions in the `/R` directory
+- Add a Shiny dashboard for user interactivity
+- Automate data ingestion via Alpha Vantage or Yahoo Finance API
+- Deploy as a hosted forecasting service with auto-refresh
+- Add unit tests and continuous integration
+
+## System Diagram
+
+> **Mobile Friendly:** Embedded as image instead of Mermaid for full compatibility
+> 📂 `./applestock.png`
+>
+
+<p align="center">
+  <img src="docs/image/applestock
+.png" alt="System Diagram" width="400"/>
+</p>
+
+## Future Enhancements
+
+- Integrate live stock data via an API (e.g., Alpha Vantage or Yahoo Finance)
+- Automate periodic data refresh with scheduled tasks
+- Expand forecasting to multiple tickers for comparative analysis
+- Add a Shiny dashboard for interactive exploration
+- Export forecast results and visualizations to CSV and PNG
+- Package the model as a reusable R module in the `/R/` directory
+- Add unit tests for helper functions (e.g., data preprocessing, plotting)
+
+
+## Contact
+
+<p align="center">
+  <a href="mailto:ohern@bu.edu">
+    <img src="https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white" alt="Email Badge"/>
+  </a>
+  <a href="https://github.com/oohmxi">
+    <img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" alt="GitHub Badge"/>
+  </a>
+  <a href="https://linkedin.com/in/omarhlink">
+    <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn Badge"/>
+  </a>
+</p>
+
+<p align="center"><em>Built with ❤️ by Omar Hernandez</em></p>
