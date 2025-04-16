@@ -16,7 +16,6 @@
 .DS_Store
 
 # Reports
-*.html
 *.pdf
 
 # Cache and temp files
