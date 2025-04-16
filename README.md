@@ -51,21 +51,18 @@ ARIMA (AutoRegressive Integrated Moving Average) is a powerful statistical model
 
 ```
 AppleStockAnalysis/
-├── README.md
 ├── AppleStockAnalysis.Rmd
+├── README.md
 ├── .gitignore
 ├── data/
-│   └── AAPL.csv
+│   └── apple_stock.csv
 ├── docs/
-│   └── AppleStockAnalysis.html
-├── plots/
-│   └── forecast_plot.png
+│   ├── index.html
+│   └── image/
+│       └── applestock.png
 ├── R/
 │   ├── forecasting_utils.R
 │   └── plotting_utils.R
-└── .vscode/
-    ├── settings.json
-    └── launch.json
 ```
 
 ## How to Run
@@ -90,7 +87,7 @@ rmarkdown::render("AppleStockAnalysis.Rmd")
 ## System Diagram
 
 > **Mobile Friendly:** Embedded as image instead of Mermaid for full compatibility
-> 📂 `./applestock.png`
+> 📂 `./docs/image/applestock.png`
 
 <p align="center">
   <img src="docs/image/applestock.png" alt="System Diagram" width="400"/>
