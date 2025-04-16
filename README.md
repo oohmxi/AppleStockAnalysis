@@ -10,6 +10,13 @@
 
 This project analyzes and forecasts trends in Apple's historical stock price data using R. It applies ARIMA models, seasonal decomposition, and time series visualizations to uncover market patterns and project future performance.
 
+## Dataset Source
+
+This project uses Apple Inc. stock data retrieved from a public dataset hosted on Kaggle:
+[Apple Stock Data 2025 – Umer Haddii](https://www.kaggle.com/datasets/umerhaddii/apple-stock-data-2025)
+
+The dataset includes historical trading data for AAPL from 1980 to 2025, including open/close prices, volume, and other relevant metrics.
+
 ## Technologies Used
 
 - R / RMarkdown
