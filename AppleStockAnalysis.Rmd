@@ -1,21 +1,157 @@
 ---
-title: "Apple Stock Time Series Forecasting"
-author: "Mr. O"
-output: html_document
+title: "Apple Inc. Stock Data Analysis"
+author: "Omar Hernandez"
+output:
+  html_document:
+    fig_width: 8
+    fig_height: 4
+    code_folding: hide
+    highlight: tango
+    toc: true
+    toc_float:
+      collapsed: true
+# 📁 Project Folder Structure Overview
+
+# - data/      → Contains the raw dataset (apple_stock.csv)
+# - plots/     → Stores exported ggplot visuals for README & reports
+# - docs/      → Final HTML report lives here for GitHub Pages
+# - R/         → Reserved for utility functions (modularization)
+# - launch.command → Script to knit Rmd and move HTML to docs/
+# - AppleStockAnalysis.Rmd → Main analysis and forecasting notebook
+
 ---
 
 ```{r setup, include=FALSE}
-library(tidyverse)
-library(forecast)
-library(lubridate)
+knitr::opts_chunk$set(fig.width=8, fig.height=4,
+                      echo=FALSE, warning=FALSE, message=FALSE)
 ```
 
-## Introduction
+## Apple Inc. Stock Analysis
+This project provides insights into Apple's stock performance by analyzing historical trading data, including trends in monthly average closing prices, the distribution of trading days across weekdays, and the applicability of the Central Limit Theorem through sampling methods.
 
-This report explores the time series analysis and forecasting of Apple stock closing prices using ARIMA models and visual trend analysis.
+## Apple Inc. Stock Dataset 
+The Apple stock dataset captures daily trading information for Apple Inc. (AAPL), including opening and closing prices, highs, lows, adjusted closing prices, trading volume, and derived metrics like daily returns, enabling comprehensive analysis of stock performance, volatility, and market trends from 1980 to 2025.
 
-## Goals
-- Import and clean Apple stock data
-- Visualize long-term and short-term trends
-- Apply ARIMA and moving average models
-- Evaluate forecast accuracy
+```{r echo=TRUE}
+# Load necessary libraries
+library(tidyverse)
+library(lubridate)
+library(plotly)
+
+# Load dataset from project root
+apple_stock <- read.csv("data/apple_stock.csv", stringsAsFactors = FALSE)
+
+# Convert Date column
+apple_stock <- apple_stock %>%
+  mutate(Date = as.Date(X, format = "%m/%d/%y"))
+
+# Check for missing values
+sum(is.na(apple_stock))
+```
+
+## Derive New Variables:
+```{r echo = TRUE}
+apple_stock <- apple_stock %>%
+  mutate(DayOfWeek = weekdays(Date),
+         Return = (Close - lag(Close)) / lag(Close))
+
+print(head(apple_stock))
+
+sum_data <- data.frame(
+  Min = min(apple_stock$Return, na.rm = TRUE),
+  Q1 = quantile(apple_stock$Return, 0.25, na.rm = TRUE),
+  Median = median(apple_stock$Return, na.rm = TRUE),
+  Mean = mean(apple_stock$Return, na.rm = TRUE),
+  Q3 = quantile(apple_stock$Return, 0.75, na.rm = TRUE),
+  Max = max(apple_stock$Return, na.rm = TRUE)
+)
+rownames(sum_data) <- c("Daily Return Summary")
+sum_data
+```
+
+## Analyze Categorical and Numerical Variables
+```{r echo = TRUE}
+day_counts <- apple_stock %>% group_by(DayOfWeek) %>% summarise(Count = n())
+p_cat <- ggplot(day_counts, aes(x = DayOfWeek, y = Count, fill = DayOfWeek)) +
+  geom_bar(stat = "identity") +
+  labs(title = "Number of Trading Days by Day of Week", x = "Day", y = "Count") +
+  theme_minimal()
+ggplotly(p_cat)
+
+p_num <- ggplot(apple_stock, aes(x = Close)) +
+  geom_histogram(bins = 30, fill = "steelblue", color = "black") +
+  labs(title = "Distribution of Apple Closing Prices", x = "Closing Price", y = "Frequency") +
+  theme_minimal()
+ggplotly(p_num)
+```
+
+## Analyze Relationship Between Numerical Variables
+```{r echo = TRUE}
+p_bi <- ggplot(apple_stock, aes(x = Open, y = Close)) +
+  geom_point(alpha = 0.5, color = "darkgreen") +
+  labs(title = "Scatter Plot: Open vs. Close Prices", x = "Open Price", y = "Close Price") +
+  theme_minimal()
+ggplotly(p_bi)
+```
+
+## Examining the Distribution of a Numerical Variable:
+```{r echo = TRUE}
+p_return <- ggplot(apple_stock, aes(x = Return)) +
+  geom_histogram(bins = 30, fill = "coral", color = "black") +
+  labs(title = "Distribution of Daily Returns", x = "Daily Return", y = "Frequency") +
+  theme_minimal()
+ggplotly(p_return)
+```
+
+## Central Limit Theorem Demonstration:
+```{r echo = TRUE}
+set.seed(123)
+sample_means <- replicate(1000, {
+  sample_data <- sample(apple_stock$Return, size = 30, replace = TRUE)
+  mean(sample_data, na.rm = TRUE)
+})
+clt_data <- data.frame(SampleMean = sample_means)
+p_clt <- ggplot(clt_data, aes(x = SampleMean)) +
+  geom_histogram(bins = 30, fill = "lightblue", color = "black") +
+  labs(title = "Sampling Distribution of Daily Return Means", x = "Sample Mean", y = "Frequency") +
+  theme_minimal()
+ggplotly(p_clt)
+
+random_sample <- apple_stock %>% sample_n(500)
+summary(random_sample$Return)
+
+p_random <- ggplot(random_sample, aes(x = Return)) +
+  geom_histogram(bins = 30, fill = "lightgreen", color = "black") +
+  labs(title = "Histogram of Random Sample Returns", x = "Return", y = "Frequency") +
+  theme_minimal()
+ggplotly(p_random)
+
+apple_stock <- apple_stock %>% mutate(Year = year(Date))
+stratified_sample <- apple_stock %>% group_by(Year) %>% sample_frac(0.1)
+summary(stratified_sample$Return)
+
+p_stratified <- ggplot(stratified_sample, aes(x = Return)) +
+  geom_histogram(bins = 30, fill = "lightblue", color = "black") +
+  labs(title = "Histogram of Stratified Sample Returns", x = "Return", y = "Frequency") +
+  theme_minimal()
+ggplotly(p_stratified)
+```
+
+## Data Wrangling (Module 6 Techniques):
+```{r echo = TRUE}
+apple_stock <- apple_stock %>%
+  mutate(Month = floor_date(Date, unit = "month"))
+
+monthly_avg <- apple_stock %>%
+  group_by(Month) %>%
+  summarise(Avg_Close = mean(Close, na.rm = TRUE))
+
+p_monthly <- ggplot(monthly_avg, aes(x = Month, y = Avg_Close)) +
+  geom_line(color = "purple") +
+  labs(title = "Monthly Average Closing Prices", x = "Month", y = "Average Close") +
+  theme_minimal() +
+  scale_x_date(date_breaks = "1 year", date_labels = "%Y") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+ggplotly(p_monthly)
+```
+

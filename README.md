@@ -48,9 +48,7 @@ ARIMA (AutoRegressive Integrated Moving Average) is a powerful statistical model
 AppleStockAnalysis/
 ├── README.md
 ├── AppleStockAnalysis.Rmd
-├── kaizen.md
 ├── .gitignore
-├── setup_r_kaizen.py
 ├── data/
 │   └── AAPL.csv
 ├── docs/
