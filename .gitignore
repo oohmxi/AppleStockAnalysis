@@ -29,5 +29,11 @@ launch.command
 inject_folder_structure.sh
 inject_dir_structure.sh
 
-# Plot exports (optional: include in repo if needed for display)
-# plots/*.png
+
+# Automation / Local Tools
+fix_yaml_comments.sh
+inject_dir_structure.sh
+launch_auto_full.command
+master.sh
+temp_rmd_output.Rmd
+setup_r_kaizen.py

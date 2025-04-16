@@ -17,6 +17,11 @@ This project uses Apple Inc. stock data retrieved from a public dataset hosted o
 
 The dataset includes historical trading data for AAPL from 1980 to 2025, including open/close prices, volume, and other relevant metrics.
 
+## 🔗 Live Report
+
+📊 View the full interactive HTML report hosted on GitHub Pages:
+👉 [Apple Stock Analysis Report](https://oohmxi.github.io/AppleStockAnalysis/)
+
 ## Technologies Used
 
 - R / RMarkdown
@@ -100,7 +105,6 @@ rmarkdown::render("AppleStockAnalysis.Rmd")
 - Export forecast results and visualizations to CSV and PNG
 - Package the model as a reusable R module in the `/R/` directory
 - Add unit tests for helper functions (e.g., data preprocessing, plotting)
-
 
 ## Contact
 
