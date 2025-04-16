@@ -19,8 +19,16 @@
 *.html
 *.pdf
 
-# Cache
+# Cache and temp files
 .Rcheck/
 __pycache__/
 *.rds
 *.RData
+
+# Local scripts and utilities
+launch.command
+inject_folder_structure.sh
+inject_dir_structure.sh
+
+# Plot exports (optional: include in repo if needed for display)
+# plots/*.png
