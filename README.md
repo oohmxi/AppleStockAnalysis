@@ -84,8 +84,7 @@ rmarkdown::render("AppleStockAnalysis.Rmd")
 >
 
 <p align="center">
-  <img src="docs/image/applestock
-.png" alt="System Diagram" width="400"/>
+  <img src="docs/image/applestock.png" alt="System Diagram" width="400"/>
 </p>
 
 ## Future Enhancements
