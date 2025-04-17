@@ -4,6 +4,9 @@
 
 # AppleStockAnalysis
 
+![version](https://img.shields.io/badge/version-v1.0.0-blue)
+![status](https://img.shields.io/badge/status-production--ready-brightgreen)
+
 ### Time Series Forecasting in R
 
 ## Project Overview
@@ -34,6 +37,10 @@ The dataset includes historical trading data for AAPL from 1980 to 2025, includi
 ## Project Goal
 
 To develop a time series forecasting solution using Apple stock price data with a focus on clear visualizations, reproducible modeling, and business-applicable insights.
+
+## Statistical Note: Central Limit Theorem
+
+This project includes a demonstration of the Central Limit Theorem (CLT), a fundamental concept in probability and statistics. By simulating repeated samples from Apple’s daily returns, the notebook shows how sample means form a normal distribution — reinforcing the validity of inferential forecasting in time series analysis.
 
 ## Features
 
@@ -125,4 +132,6 @@ rmarkdown::render("AppleStockAnalysis.Rmd")
   </tr>
 </table>
 
-<p align="center"><em>Built with ❤️ by Omar Hernandez</em></p>
+
+
+<p align="center"><em>In the spirit of Apple—simple, scalable, and slightly ahead of its time.<br>oohmxi Technologies, Inc.</em></p>
