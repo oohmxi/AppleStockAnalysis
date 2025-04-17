@@ -85,7 +85,7 @@ p_num <- ggplot(apple_stock, aes(x = Close)) +
 ggplotly(p_num)
 ```
 
-## Analyze Relationship Between Numerical Variables
+## Analyze the Relationship Between Numerical Variables
 ```{r echo = TRUE}
 p_bi <- ggplot(apple_stock, aes(x = Open, y = Close)) +
   geom_point(alpha = 0.5, color = "darkgreen") +
@@ -94,7 +94,7 @@ p_bi <- ggplot(apple_stock, aes(x = Open, y = Close)) +
 ggplotly(p_bi)
 ```
 
-## Examining the Distribution of a Numerical Variable:
+## Examine the Distribution of a Numerical Variable:
 ```{r echo = TRUE}
 p_return <- ggplot(apple_stock, aes(x = Return)) +
   geom_histogram(bins = 30, fill = "coral", color = "black") +
@@ -137,7 +137,7 @@ p_stratified <- ggplot(stratified_sample, aes(x = Return)) +
 ggplotly(p_stratified)
 ```
 
-## Data Wrangling (Module 6 Techniques):
+## Data Wrangling:
 ```{r echo = TRUE}
 apple_stock <- apple_stock %>%
   mutate(Month = floor_date(Date, unit = "month"))
